@@ -16,6 +16,12 @@ enum TimeFilter: String, CaseIterable {
     }
 }
 
+private struct ScrollData: Equatable {
+    var offset: CGFloat
+    var contentHeight: CGFloat
+    var visibleHeight: CGFloat
+}
+
 struct ContentView: View {
     @Query(sort: \Meme.savedAt, order: .reverse) private var memes: [Meme]
     @Environment(\.modelContext) private var modelContext
@@ -26,6 +32,8 @@ struct ContentView: View {
     @State private var selection: Set<UUID> = []
     @State private var showDeleteConfirmation = false
     @State private var showShareSheet = false
+    @State private var showToolbar = true
+    @State private var lastScrollOffset: CGFloat = 0
 
     private var filteredMemes: [Meme] {
         guard let filter else { return memes }
@@ -58,6 +66,21 @@ struct ContentView: View {
 
     private var selectedMemes: [Meme] {
         filteredMemes.filter { selection.contains($0.id) }
+    }
+
+    private func handleScroll(offset: CGFloat, contentHeight: CGFloat, visibleHeight: CGFloat) {
+        let maxOffset = max(contentHeight - visibleHeight, 0)
+        guard offset > 0 && offset < maxOffset else { return }
+        let delta = offset - lastScrollOffset
+        if abs(delta) > 10 {
+            let scrollingDown = delta > 0
+            if scrollingDown && showToolbar && !isSelecting {
+                withAnimation { showToolbar = false }
+            } else if !scrollingDown && !showToolbar {
+                withAnimation { showToolbar = true }
+            }
+            lastScrollOffset = offset
+        }
     }
 
     private func handleTap(_ meme: Meme) {
@@ -104,6 +127,11 @@ struct ContentView: View {
                             }
                         }
                     }
+                    .onScrollGeometryChange(for: ScrollData.self) { geo in
+                        ScrollData(offset: geo.contentOffset.y, contentHeight: geo.contentSize.height, visibleHeight: geo.visibleRect.height)
+                    } action: { _, new in
+                        handleScroll(offset: new.offset, contentHeight: new.contentHeight, visibleHeight: new.visibleHeight)
+                    }
                 } else {
                     ScrollView {
                         LazyVStack(spacing: 0, pinnedViews: .sectionHeaders) {
@@ -119,9 +147,14 @@ struct ContentView: View {
                             }
                         }
                     }
+                    .onScrollGeometryChange(for: ScrollData.self) { geo in
+                        ScrollData(offset: geo.contentOffset.y, contentHeight: geo.contentSize.height, visibleHeight: geo.visibleRect.height)
+                    } action: { _, new in
+                        handleScroll(offset: new.offset, contentHeight: new.contentHeight, visibleHeight: new.visibleHeight)
+                    }
                 }
             }
-            .navigationTitle("Meme Stash")
+            .navigationTitle("Stash")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {
@@ -129,8 +162,9 @@ struct ContentView: View {
                         Text("\(selection.count) Selected")
                             .font(.headline)
                     } else {
-                        Text("Meme Stash")
+                        Text("Stash")
                             .font(.custom("SpaceMono-Bold", size: 20))
+                            .tracking(-0.8)
                     }
                 }
             }
@@ -166,6 +200,7 @@ struct ContentView: View {
                                 Button {
                                     withAnimation {
                                         isSelecting = true
+                                        showToolbar = true
                                         selection.removeAll()
                                     }
                                 } label: {
@@ -201,6 +236,17 @@ struct ContentView: View {
                     }
                 }
             }
+            .toolbarBackground(.bar, for: .navigationBar)
+            .toolbarBackgroundVisibility(.visible, for: .navigationBar)
+            .toolbarVisibility(showToolbar ? .visible : .hidden, for: .navigationBar)
+            .overlay(alignment: .top) {
+                if !showToolbar {
+                    Rectangle()
+                        .fill(.bar)
+                        .ignoresSafeArea(edges: .top)
+                        .frame(height: 0)
+                }
+            }
             if isSelecting && !selection.isEmpty {
                 HStack {
                     Button {
@@ -221,7 +267,7 @@ struct ContentView: View {
             }
         }
         .sheet(item: $selectedMeme) { meme in
-            MemeDetailView(meme: meme)
+            MemeDetailView(memes: filteredMemes, currentMemeID: meme.id)
                 .presentationDragIndicator(.visible)
         }
         .sheet(isPresented: $showShareSheet) {

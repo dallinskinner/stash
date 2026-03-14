@@ -2,24 +2,29 @@ import SwiftUI
 import SwiftData
 
 struct MemeDetailView: View {
-    let meme: Meme
+    let memes: [Meme]
+    @State var currentMemeID: Meme.ID
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
-    @State private var image: UIImage?
     @State private var showDeleteConfirmation = false
     @State private var showShareSheet = false
+    @State private var loadedImages: [UUID: UIImage] = [:]
+
+    private var currentMeme: Meme? {
+        memes.first { $0.id == currentMemeID }
+    }
 
     var body: some View {
         ZStack {
             Color.black.ignoresSafeArea()
 
-            if let image {
-                Image(uiImage: image)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .padding(.vertical, 60)
+            TabView(selection: $currentMemeID) {
+                ForEach(memes) { meme in
+                    MemePageView(meme: meme, loadedImages: $loadedImages)
+                        .tag(meme.id)
+                }
             }
+            .tabViewStyle(.page(indexDisplayMode: .never))
 
             VStack {
                 HStack {
@@ -28,17 +33,19 @@ struct MemeDetailView: View {
                         Image(systemName: "xmark.circle.fill")
                             .font(.system(size: 26))
                             .symbolRenderingMode(.palette)
-                            .foregroundStyle(.white, Color(.systemGray3).opacity(0.7))
+                            .foregroundStyle(.white, .gray)
                     }
                 }
                 .padding()
 
                 Spacer()
 
-                Text(meme.savedAt.formatted(date: .abbreviated, time: .shortened))
-                    .font(.caption)
-                    .foregroundStyle(.gray)
-                    .padding(.bottom, 8)
+                if let currentMeme {
+                    Text(currentMeme.savedAt.formatted(date: .abbreviated, time: .shortened))
+                        .font(.caption)
+                        .foregroundStyle(.gray)
+                        .padding(.bottom, 8)
+                }
 
                 HStack {
                     Button { showShareSheet = true } label: {
@@ -47,7 +54,7 @@ struct MemeDetailView: View {
                     }
                     Spacer()
                     Button {
-                        if let image {
+                        if let image = loadedImages[currentMemeID] {
                             UIPasteboard.general.image = image
                         }
                     } label: {
@@ -67,23 +74,46 @@ struct MemeDetailView: View {
             }
         }
         .sheet(isPresented: $showShareSheet) {
-            if let image {
+            if let image = loadedImages[currentMemeID] {
                 ActivityView(items: [image])
                     .presentationDetents([.medium, .large])
             }
         }
         .alert("Delete Meme?", isPresented: $showDeleteConfirmation) {
             Button("Delete", role: .destructive) {
-                modelContext.delete(meme)
+                if let meme = currentMeme {
+                    modelContext.delete(meme)
+                }
                 dismiss()
             }
             Button("Cancel", role: .cancel) {}
         } message: {
             Text("This can't be undone.")
         }
-        .task {
+    }
+}
+
+private struct MemePageView: View {
+    let meme: Meme
+    @Binding var loadedImages: [UUID: UIImage]
+
+    var body: some View {
+        Color.clear
+            .overlay {
+                if let image = loadedImages[meme.id] {
+                    Image(uiImage: image)
+                        .resizable()
+                        .scaledToFit()
+                        .padding(.vertical, 60)
+                }
+            }
+            .task {
+            guard loadedImages[meme.id] == nil else { return }
             let data = meme.imageData
-            image = await Task.detached { UIImage(data: data) }.value
+            let image = await Task.detached { UIImage(data: data) }.value
+            if let image {
+                loadedImages[meme.id] = image
+            }
         }
     }
 }
