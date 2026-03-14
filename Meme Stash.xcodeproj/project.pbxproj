@@ -6,6 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		307043CF2F64EE6500CE4C35 /* MemeStashShare.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 307043C32F64EE6500CE4C35 /* MemeStashShare.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		307043D12F64EE6500CE4C35 /* Meme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307043D02F64EE6500CE4C35 /* Meme.swift */; };
+		307043D22F64EE6500CE4C35 /* Meme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307043D02F64EE6500CE4C35 /* Meme.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		307043A72F64EE6500CE4C35 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -21,13 +27,46 @@
 			remoteGlobalIDString = 307043982F64EE6300CE4C35;
 			remoteInfo = "Meme Stash";
 		};
+		307043CC2F64EE6500CE4C35 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 307043912F64EE6300CE4C35 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 307043C52F64EE6500CE4C35;
+			remoteInfo = MemeStashShare;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		307043CE2F64EE6500CE4C35 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				307043CF2F64EE6500CE4C35 /* MemeStashShare.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		307043992F64EE6300CE4C35 /* Meme Stash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Meme Stash.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		307043A62F64EE6500CE4C35 /* Meme StashTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Meme StashTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		307043B02F64EE6500CE4C35 /* Meme StashUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Meme StashUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		307043C32F64EE6500CE4C35 /* MemeStashShare.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MemeStashShare.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		307043D02F64EE6500CE4C35 /* Meme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meme.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		307043D42F64EE6500CE4C35 /* Exceptions for "MemeStashShare" folder in "MemeStashShare" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 307043C52F64EE6500CE4C35 /* MemeStashShare */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		3070439B2F64EE6300CE4C35 /* Meme Stash */ = {
@@ -43,6 +82,14 @@
 		307043B32F64EE6500CE4C35 /* Meme StashUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = "Meme StashUITests";
+			sourceTree = "<group>";
+		};
+		307043C42F64EE6500CE4C35 /* MemeStashShare */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				307043D42F64EE6500CE4C35 /* Exceptions for "MemeStashShare" folder in "MemeStashShare" target */,
+			);
+			path = MemeStashShare;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -69,6 +116,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		307043C72F64EE6500CE4C35 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -76,6 +130,8 @@
 			isa = PBXGroup;
 			children = (
 				3070439B2F64EE6300CE4C35 /* Meme Stash */,
+				307043D32F64EE6500CE4C35 /* Shared */,
+				307043C42F64EE6500CE4C35 /* MemeStashShare */,
 				307043A92F64EE6500CE4C35 /* Meme StashTests */,
 				307043B32F64EE6500CE4C35 /* Meme StashUITests */,
 				3070439A2F64EE6300CE4C35 /* Products */,
@@ -88,8 +144,17 @@
 				307043992F64EE6300CE4C35 /* Meme Stash.app */,
 				307043A62F64EE6500CE4C35 /* Meme StashTests.xctest */,
 				307043B02F64EE6500CE4C35 /* Meme StashUITests.xctest */,
+				307043C32F64EE6500CE4C35 /* MemeStashShare.appex */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		307043D32F64EE6500CE4C35 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				307043D02F64EE6500CE4C35 /* Meme.swift */,
+			);
+			path = Shared;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -102,10 +167,12 @@
 				307043952F64EE6300CE4C35 /* Sources */,
 				307043962F64EE6300CE4C35 /* Frameworks */,
 				307043972F64EE6300CE4C35 /* Resources */,
+				307043CE2F64EE6500CE4C35 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				307043CD2F64EE6500CE4C35 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				3070439B2F64EE6300CE4C35 /* Meme Stash */,
@@ -163,6 +230,28 @@
 			productReference = 307043B02F64EE6500CE4C35 /* Meme StashUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		307043C52F64EE6500CE4C35 /* MemeStashShare */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 307043CB2F64EE6500CE4C35 /* Build configuration list for PBXNativeTarget "MemeStashShare" */;
+			buildPhases = (
+				307043C62F64EE6500CE4C35 /* Sources */,
+				307043C72F64EE6500CE4C35 /* Frameworks */,
+				307043C82F64EE6500CE4C35 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				307043C42F64EE6500CE4C35 /* MemeStashShare */,
+			);
+			name = MemeStashShare;
+			packageProductDependencies = (
+			);
+			productName = MemeStashShare;
+			productReference = 307043C32F64EE6500CE4C35 /* MemeStashShare.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -184,6 +273,9 @@
 						CreatedOnToolsVersion = 26.2;
 						TestTargetID = 307043982F64EE6300CE4C35;
 					};
+					307043C52F64EE6500CE4C35 = {
+						CreatedOnToolsVersion = 26.2;
+					};
 				};
 			};
 			buildConfigurationList = 307043942F64EE6300CE4C35 /* Build configuration list for PBXProject "Meme Stash" */;
@@ -203,6 +295,7 @@
 				307043982F64EE6300CE4C35 /* Meme Stash */,
 				307043A52F64EE6500CE4C35 /* Meme StashTests */,
 				307043AF2F64EE6500CE4C35 /* Meme StashUITests */,
+				307043C52F64EE6500CE4C35 /* MemeStashShare */,
 			);
 		};
 /* End PBXProject section */
@@ -229,6 +322,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		307043C82F64EE6500CE4C35 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -236,6 +336,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				307043D12F64EE6500CE4C35 /* Meme.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,6 +354,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		307043C62F64EE6500CE4C35 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				307043D22F64EE6500CE4C35 /* Meme.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -265,6 +374,11 @@
 			isa = PBXTargetDependency;
 			target = 307043982F64EE6300CE4C35 /* Meme Stash */;
 			targetProxy = 307043B12F64EE6500CE4C35 /* PBXContainerItemProxy */;
+		};
+		307043CD2F64EE6500CE4C35 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 307043C52F64EE6500CE4C35 /* MemeStashShare */;
+			targetProxy = 307043CC2F64EE6500CE4C35 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -395,6 +509,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Meme Stash/Meme Stash.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3R72T79JHR;
@@ -427,6 +542,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Meme Stash/Meme Stash.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3R72T79JHR;
@@ -538,6 +654,62 @@
 			};
 			name = Release;
 		};
+		307043C92F64EE6500CE4C35 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = MemeStashShare/MemeStashShare.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3R72T79JHR;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = MemeStashShare/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dallinskinner.Meme-Stash.MemeStashShare";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		307043CA2F64EE6500CE4C35 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = MemeStashShare/MemeStashShare.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3R72T79JHR;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = MemeStashShare/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dallinskinner.Meme-Stash.MemeStashShare";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -573,6 +745,15 @@
 			buildConfigurations = (
 				307043C12F64EE6500CE4C35 /* Debug */,
 				307043C22F64EE6500CE4C35 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		307043CB2F64EE6500CE4C35 /* Build configuration list for PBXNativeTarget "MemeStashShare" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				307043C92F64EE6500CE4C35 /* Debug */,
+				307043CA2F64EE6500CE4C35 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
